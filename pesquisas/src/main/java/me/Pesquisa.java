@@ -3,55 +3,57 @@ package me;
 import java.util.Arrays;
 
 public class Pesquisa {
-    //TODO: tratar o caso de não encontrar.
-    public int pesquisaSequencial(int v[], int key) {
-        int comparacoes = 0;
+    public static int comparacoesSequencial = 0;
+    public static int comparacoesBinaria = 0;
+
+    public static int pesquisaSequencial(int[] v, int key) {
+        comparacoesSequencial = 0;
+
+        System.out.println("\n[Busca Sequencial]");
+        // Acaba sendo problemático nos testes com vetores maiores.
+        //System.out.println("Vetor: " + Arrays.toString(v));
+        System.out.println("Chave: " + key);
+
         for (int i = 0; i < v.length; i++) {
-            comparacoes++;
-            if (key == v[i]) {
-                System.out.println("Comparações(seq./encontrado): "+comparacoes);
-                System.out.println();
+            comparacoesSequencial++;
+            if (v[i] == key) {
+                System.out.println("Valor encontrado no índice " + i);
+                System.out.println("Comparaçoes realizadas: " + comparacoesSequencial);
                 return v[i];
             }
         }
-        System.out.println("Comparações(seq./não encontrado): "+comparacoes);
-        System.out.println();
+        System.out.println("Valor nao encontrado.");
+        System.out.println("Comparaçoes realizadas: " + comparacoesSequencial);
         return -1;
     }
-    
-    //TODO: tratar o caso de não encontrar.
-    public int pesquisaBinaria(int v[], int key) {
+
+    public static int pesquisaBinaria(int[] v, int key) {
+        comparacoesBinaria = 0;
         Arrays.sort(v);
-        int comparacoes = 0;
+        System.out.println("\n[Busca Binária]");
+        // Acaba sendo problemático nos testes com vetores maiores.
+        //System.out.println("Vetor (ordenado): " + Arrays.toString(v));
+        System.out.println("Chave: " + key);
+
         int inicio = 0;
-        int meio = 0;
-        int fim = v.length;
+        int fim = v.length - 1;
 
         while (inicio <= fim) {
-            comparacoes++;
-            for (int i = meio; i < v.length; i++) {
-                System.out.print(v[i]+" ");
-            }
-            System.out.println();
-            meio = (inicio + fim) / 2;
-            if (v[meio] == key) {
-                System.out.println("Comparações(bin/encontrado): "+comparacoes);
-                System.out.println();
-                return v[meio];
-            } else {
-                if (key < v[meio]) {
-                    fim = meio--;
-                } else {
-                    inicio = meio++;
-                }
-            }
-        }
+            int meio = (inicio + fim) / 2;
+            comparacoesBinaria++;
 
-        if (inicio > fim) {
-            System.out.println("Comparações(bin/não encontrado): "+comparacoes);
-            System.out.println();
-            return -1;
+            if (v[meio] == key) {
+                System.out.println("Valor encontrado no índice " + meio);
+                System.out.println("Comparaçoes realizadas: " + comparacoesBinaria);
+                return v[meio];
+            } else if (v[meio] < key) {
+                inicio = meio + 1;
+            } else {
+                fim = meio - 1;
+            }
         }
+        System.out.println("Valor nao encontrado.");
+        System.out.println("Comparaçoes realizadas: " + comparacoesBinaria);
         return -1;
     }
 }

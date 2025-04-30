@@ -1,27 +1,27 @@
 package me;
 
+import java.util.Random;
+
 public class Main {
     public static void main(String[] args) {
-        Pesquisa finder = new Pesquisa();
-        
-        int[] v = {10, 20, 30, 40, 100};
+        int[] vetor1 = {9, 5, 2, 7, 3};
+        int[] vetor2 = {3, 1, 5, 7, 9, 11, 13, 15};
 
-        finder.pesquisaBinaria(v, 100);
-        finder.pesquisaBinaria(v, 10);
-        finder.pesquisaBinaria(v, 200); // Loop infinito.
-        
-        finder.pesquisaSequencial(v, 100);
-        finder.pesquisaSequencial(v, 10);
-        finder.pesquisaSequencial(v, 0); // Exception.
+        Pesquisa.pesquisaSequencial(vetor1, 7);
+        Pesquisa.pesquisaBinaria(vetor1, 4);
 
-        int [] v2 = {20, 10, 15, 11};
+        Pesquisa.pesquisaSequencial(vetor2, 13);
+        Pesquisa.pesquisaBinaria(vetor2, 4);
 
-        finder.pesquisaBinaria(v2, 11);
-        finder.pesquisaBinaria(v2, 20);
-        finder.pesquisaBinaria(v2, 0);
+        Random r = new Random();
+        int tam = r.nextInt(0, 100000);
+        int[] v3 = new int[tam];
 
-        finder.pesquisaSequencial(v2, 11);
-        finder.pesquisaSequencial(v2, 20);
-        finder.pesquisaSequencial(v2, 0);
+        for (int i = 0; i < tam; i++) {
+            v3[i] = r.nextInt(0, 999);
+        }
+
+        Pesquisa.pesquisaSequencial(v3, 64);
+        Pesquisa.pesquisaBinaria(v3, 64);
     }
 }
