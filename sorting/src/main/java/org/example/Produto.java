@@ -8,6 +8,12 @@ public class Produto {
     private double preco;
 
 
+    public Produto(String nome, LocalDate data, double preco) {
+        this.nome = nome;
+        this.data = data;
+        this.preco = preco;
+    }
+
     public String getNome() {
         return nome;
     }
